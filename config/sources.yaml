@@ -1,0 +1,43 @@
+sources:
+  # 英文来源
+  - name: "TechCrunch AI"
+    url: "https://techcrunch.com/category/artificial-intelligence/feed/"
+    language: "en"
+
+  - name: "VentureBeat AI"
+    url: "https://venturebeat.com/category/ai/feed/"
+    language: "en"
+
+  - name: "MIT Technology Review"
+    url: "https://www.technologyreview.com/feed/"
+    language: "en"
+
+  - name: "The Verge AI"
+    url: "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml"
+    language: "en"
+
+  - name: "Hugging Face Blog"
+    url: "https://huggingface.co/blog/feed.xml"
+    language: "en"
+
+  - name: "Google DeepMind Blog"
+    url: "https://deepmind.google/blog/rss.xml"
+    language: "en"
+
+  - name: "Hacker News"
+    url: "https://hnrss.org/frontpage?q=AI+OR+LLM+OR+GPT+OR+Claude+OR+Gemini"
+    language: "en"
+
+  # 中文来源
+  - name: "机器之心"
+    url: "https://www.jiqizhixin.com/rss"
+    language: "zh"
+
+  - name: "量子位"
+    url: "https://www.qbitai.com/feed"
+    language: "zh"
+
+settings:
+  max_items_per_source: 10
+  hours_lookback: 24
+  digest_language: "zh"   # zh = 中文日报, en = English digest
