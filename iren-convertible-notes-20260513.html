@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IREN可转换票据专题 — Kerwin Team</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:    #fff1e5;
+  --paper: #fffaf4;
+  --ink:   #1f1a17;
+  --muted: #6f6258;
+  --line:  #dccdbf;
+  --gold:  #8a5b2b;
+  --date:  #8b4513;
+  --up:    #16a34a;
+  --down:  #dc2626;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'EB Garamond','Noto Serif SC',Georgia,'PingFang SC',serif;
+  font-size:16px;
+  line-height:1.78;
+}
+body::before{content:'';display:block;height:8px;background:#000;width:100%;}
+
+.wrap{max-width:780px;margin:0 auto;padding:0 24px 80px;}
+
+.kicker{
+  font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);padding:20px 0 8px;
+  border-bottom:1px solid var(--line);margin-bottom:22px;
+}
+.topic-name{
+  font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:6px;
+}
+.report-label{
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:4px;
+}
+.report-date{font-size:13px;color:var(--date);font-style:italic;margin-bottom:22px;}
+
+h1.headline{
+  font-size:2.05rem;font-weight:700;line-height:1.18;
+  letter-spacing:-.01em;color:var(--ink);margin-bottom:14px;
+}
+.deck{
+  font-size:1.07rem;color:var(--muted);line-height:1.55;
+  font-style:italic;border-left:3px solid var(--gold);
+  padding-left:14px;margin-bottom:22px;
+}
+.byline-row{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:8px 0;margin-bottom:32px;
+}
+.byline{font-size:12px;color:var(--muted);letter-spacing:.04em;}
+.brand-line{font-size:11px;letter-spacing:.07em;color:var(--gold);
+  white-space:nowrap;font-weight:600;}
+
+.kn-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:3px;
+  overflow:hidden;margin-bottom:38px;
+}
+.kn-cell{background:var(--paper);padding:12px 10px;text-align:center;}
+.kn-val{font-size:1.18rem;font-weight:700;color:var(--ink);display:block;}
+.kn-val.up{color:var(--up);}
+.kn-val.down{color:var(--down);}
+.kn-val.gold{color:var(--gold);}
+.kn-label{font-size:10px;color:var(--muted);letter-spacing:.03em;
+  display:block;margin-top:3px;line-height:1.35;}
+
+h2{
+  font-size:1.2rem;font-weight:700;color:var(--ink);
+  margin:40px 0 10px;padding-bottom:5px;
+  border-bottom:1.5px solid var(--line);
+}
+h3{font-size:1.02rem;font-weight:600;color:var(--gold);margin:24px 0 8px;}
+p{margin-bottom:14px;font-size:15.5px;color:var(--ink);}
+
+.src{font-size:10.5px;color:var(--muted);background:var(--bg);
+  border:1px solid var(--line);border-radius:2px;
+  padding:1px 5px;margin-left:3px;vertical-align:middle;}
+.est{font-size:10.5px;color:#b45309;background:#fef3c7;
+  border:1px solid #fcd34d;border-radius:2px;
+  padding:1px 5px;margin-left:3px;vertical-align:middle;}
+
+.debt-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:16px 0 28px;}
+.debt-table th{
+  background:var(--ink);color:var(--bg);padding:9px 11px;
+  text-align:left;font-weight:600;font-size:11.5px;letter-spacing:.04em;
+}
+.debt-table td{padding:8px 11px;border-bottom:1px solid var(--line);vertical-align:top;}
+.debt-table tr:nth-child(odd) td{background:var(--paper);}
+.debt-table tr:nth-child(even) td{background:var(--bg);}
+.debt-table .hl{font-weight:600;color:var(--gold);}
+.debt-table .new-row td{background:#fef9f0;border-left:3px solid var(--gold);}
+.tag-up{color:var(--up);font-weight:600;}
+.tag-dn{color:var(--down);font-weight:600;}
+
+.flow-box{
+  background:var(--paper);border:1px solid var(--line);
+  border-left:4px solid var(--gold);border-radius:3px;
+  padding:20px 22px;margin:18px 0 26px;
+}
+.flow-box .box-title{
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px;
+}
+.flow-steps{display:flex;flex-direction:column;}
+.flow-step{display:flex;gap:14px;align-items:flex-start;position:relative;}
+.flow-step:not(:last-child)::after{
+  content:'';position:absolute;left:12px;top:28px;bottom:-6px;
+  width:1px;background:var(--line);
+}
+.step-num{
+  width:24px;height:24px;background:var(--gold);color:#fff;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:11.5px;font-weight:700;flex-shrink:0;margin-top:2px;
+}
+.step-body{padding-bottom:18px;}
+.step-title{font-weight:600;font-size:14px;color:var(--ink);}
+.step-desc{font-size:13.5px;color:var(--muted);line-height:1.52;margin-top:3px;}
+
+.pullquote{
+  border-top:2px solid var(--ink);border-bottom:1px solid var(--line);
+  margin:30px 0;padding:18px 0 14px;
+  font-size:1.18rem;font-style:italic;color:var(--ink);line-height:1.45;
+}
+.pullquote cite{
+  display:block;font-size:11.5px;font-style:normal;
+  color:var(--muted);letter-spacing:.06em;margin-top:8px;text-transform:uppercase;
+}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0 28px;}
+.info-box{border:1px solid var(--line);border-radius:3px;padding:14px 16px;background:var(--paper);}
+.info-box .ib-head{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:10px;}
+.info-box.bull .ib-head{color:var(--up);}
+.info-box.bear .ib-head{color:var(--down);}
+.info-box.neutral .ib-head{color:var(--gold);}
+.info-box ul{list-style:none;padding:0;}
+.info-box ul li{font-size:13px;color:var(--ink);padding:4px 0;border-bottom:1px dotted var(--line);line-height:1.48;}
+.info-box ul li:last-child{border-bottom:none;}
+.info-box.bull li::before{content:'＋ ';color:var(--up);font-weight:700;}
+.info-box.bear li::before{content:'－ ';color:var(--down);font-weight:700;}
+.info-box.neutral li::before{content:'▸ ';color:var(--gold);}
+
+.timeline{margin:18px 0 28px;position:relative;padding-left:30px;}
+.timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:1px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:18px;}
+.tl-dot{width:16px;height:16px;background:var(--gold);border-radius:50%;position:absolute;left:-26px;top:3px;border:2px solid var(--bg);}
+.tl-date{font-size:11px;color:var(--date);font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px;}
+.tl-text{font-size:13.5px;color:var(--ink);line-height:1.52;}
+
+.scenario-grid{display:flex;flex-direction:column;gap:12px;margin:16px 0 28px;}
+.scenario-card{border:1px solid var(--line);border-radius:3px;padding:14px 18px;background:var(--paper);display:flex;gap:16px;align-items:flex-start;}
+.sc-badge{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#fff;border-radius:3px;padding:3px 8px;white-space:nowrap;flex-shrink:0;margin-top:1px;}
+.sc-badge.base{background:#16a34a;}
+.sc-badge.mid{background:#ca8a04;}
+.sc-badge.bear{background:#dc2626;}
+.sc-title{font-weight:600;font-size:14px;color:var(--ink);margin-bottom:4px;}
+.sc-text{font-size:13.5px;color:var(--muted);line-height:1.52;}
+
+.framework{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--ink);border-radius:0 0 3px 3px;padding:22px 24px;margin-top:48px;}
+.framework h4{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;}
+.layer-grid{display:flex;flex-direction:column;gap:10px;}
+.layer-item{display:flex;gap:12px;align-items:flex-start;}
+.layer-num{font-size:11px;font-weight:700;color:var(--paper);background:var(--muted);border-radius:2px;padding:2px 7px;flex-shrink:0;margin-top:2px;}
+.layer-text{font-size:13.5px;color:var(--ink);line-height:1.52;}
+.layer-text strong{color:var(--gold);}
+
+footer{max-width:780px;margin:0 auto;padding:22px 24px 28px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;}
+footer .fl{font-size:11px;color:var(--muted);line-height:1.75;}
+footer .fr{font-size:11px;color:var(--muted);text-align:right;line-height:1.75;}
+footer a{color:var(--gold);text-decoration:none;}
+.disclaimer{max-width:780px;margin:0 auto;padding:0 24px 28px;font-size:11px;color:var(--muted);line-height:1.65;font-style:italic;}
+
+hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0;}
+
+@media(max-width:600px){
+  .kn-grid{grid-template-columns:repeat(3,1fr);}
+  .two-col{grid-template-columns:1fr;}
+  h1.headline{font-size:1.6rem;}
+  footer{flex-direction:column;align-items:flex-start;}
+  footer .fr{text-align:left;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="kicker">KERWIN TEAM PRESENTS</div>
+<div class="topic-name">可转换票据与AI基础设施融资范式</div>
+<div class="report-label">研究简报</div>
+<div class="report-date">2026年5月13日</div>
+
+<h1 class="headline">以债换算力，以权换战略：可转换票据如何驱动AI基础设施军备竞赛</h1>
+<p class="deck">从IREN三年间四轮融资的完整轨迹，解构可转换票据的精确机理、Capped Call对冲数学与英伟达"认股权换战略绑定"的真实经济逻辑——兼横向比较CoreWeave的极端杠杆实验与飞轮失效条件。</p>
+
+<div class="byline-row">
+  <span class="byline">出品：Kerwin &nbsp;|&nbsp; OpenClaw &nbsp;|&nbsp; Enya &nbsp;|&nbsp; GPT-5.5 &amp; Claude</span>
+  <span class="brand-line">2026 kerwin 宏观对冲及AI精选组合</span>
+</div>
+
+<div class="kn-grid">
+  <div class="kn-cell">
+    <span class="kn-val gold">$2.3B</span>
+    <span class="kn-label">Dec 2025已发行<br>可转换票据（已成交）</span>
+  </div>
+  <div class="kn-cell">
+    <span class="kn-val">+$2.0B</span>
+    <span class="kn-label">May 2026新发行<br>（英伟达公告后）</span>
+  </div>
+  <div class="kn-cell">
+    <span class="kn-val up">$82.24</span>
+    <span class="kn-label">Dec 2025批次<br>Capped Call上限价</span>
+  </div>
+  <div class="kn-cell">
+    <span class="kn-val">$51.40</span>
+    <span class="kn-label">Dec 2025批次<br>转换价格（两批相同）</span>
+  </div>
+  <div class="kn-cell">
+    <span class="kn-val down">−8%</span>
+    <span class="kn-label">May 11发行公告后<br>单日最大跌幅</span>
+  </div>
+</div>
+
+<!-- ══ SECTION 1 ══ -->
+<h2>一、事件全貌：五天内的三层资本动作</h2>
+
+<p>2026年5月7–11日，IREN（NASDAQ: IREN）在五天内完成了三项相互咬合的资本动作。理解其顺序、逻辑与内在依赖，是判断本次交易真实价值的前提。</p>
+
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-dot"></div>
+    <div class="tl-date">5月7日（盘后）</div>
+    <div class="tl-text"><strong>第一层：英伟达战略合作 + 认股权证。</strong>英伟达与IREN宣布共同部署最高5GW的DSX架构AI工厂。IREN向英伟达授予五年期认股权证，以$70/股可购买最多3000万股，对应投资上限约$21亿（需满足包括监管审批在内的若干条件）。旗舰部署聚焦德克萨斯州2GW Sweetwater园区。<span class="src">来源：IREN 8-K / NVIDIA新闻稿</span></div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot"></div>
+    <div class="tl-date">5月8日</div>
+    <div class="tl-text"><strong>第二层：$34亿AI云服务合同。</strong>IREN与英伟达签订五年期合同，为其内部AI与研究工作负载提供托管式GPU云服务，采用Blackwell平台系统，部署于德克萨斯州Childress 60MW空冷数据中心，预计2027年初开始交付服务。<span class="src">来源：IREN公告</span></div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot"></div>
+    <div class="tl-date">5月11日（利好消化、股价上涨后）</div>
+    <div class="tl-text"><strong>第三层：$20亿新可转换票据私募发行。</strong>IREN向合格机构投资者（QIB）发行$20亿可转换优先票据，并给予初始购买者13天内追加$3亿的超额认购权，到期日2033年12月。同步启动终止与旧批2029、2030票据相关联的部分Capped Call头寸。<span class="src">来源：IREN公告</span></div>
+  </div>
+</div>
+
+<p>这一顺序具有明显的融资时序设计：先以战略合作推高股价，继而在高股价基准上设定更高转换价，压缩潜在稀释幅度，同时令票据对固收投资人更具吸引力。换言之，英伟达的"认可"直接降低了IREN的后续融资成本。</p>
+
+<div class="pullquote">
+  "AI工厂正成为全球经济的基础设施。大规模部署这些系统需要跨越完整技术栈的深度整合——算力、网络、软件、电力与运营。"
+  <cite>—— Jensen Huang，英伟达创始人兼CEO，2026年5月7日</cite>
+</div>
+
+<!-- ══ SECTION 2 ══ -->
+<h2>二、IREN的完整债务演进：三年四轮</h2>
+
+<p>May 2026的新发行不能孤立理解，必须放入IREN自2024年以来连续重构债务结构的完整序列中。IREN是将可转换票据作为核心融资工具、反复迭代优化的实践者，而非临时借道资本市场的机会主义者。</p>
+
+<table class="debt-table">
+  <thead>
+    <tr>
+      <th>批次</th>
+      <th>规模</th>
+      <th>票息率</th>
+      <th>到期年</th>
+      <th>初始转换价</th>
+      <th>特征与用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2024年批次</td>
+      <td>$5亿（上调后）</td>
+      <td class="tag-dn">3.50%</td>
+      <td>2029</td>
+      <td>$13.64</td>
+      <td>转型初期，高票息，股价基准低</td>
+    </tr>
+    <tr>
+      <td>2025年批次</td>
+      <td>（未完整披露）</td>
+      <td class="tag-dn">3.25%</td>
+      <td>2030</td>
+      <td>$16.81</td>
+      <td>股价仍处于低位区间</td>
+    </tr>
+    <tr>
+      <td>2025年12月（再融资）</td>
+      <td class="hl">$23亿（含超额）</td>
+      <td class="tag-up">0.25% / 1.00%</td>
+      <td>2032 / 2033</td>
+      <td class="hl">~$51.40（两批相同）</td>
+      <td>回购旧票$5.44亿面值；Capped Call上限$82.24；净延长债务期限、压低票息</td>
+    </tr>
+    <tr class="new-row">
+      <td><strong>2026年5月（本次）</strong></td>
+      <td class="hl"><strong>$20亿（+$3亿选择权）</strong></td>
+      <td><strong>待定价</strong></td>
+      <td><strong>2033</strong></td>
+      <td>预计25%溢价于$41附近基准<span class="est">推算</span></td>
+      <td>英伟达战略公告后即时发行；可于2030年6月后强制赎回</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>2.1 为何以$16.3亿回购$5.44亿面值旧债？——这恰恰是好消息</h3>
+
+<p>2025年12月再融资中，IREN以约$16.3亿的现金回购了面值仅$5.44亿的旧票据，账面溢价约$10.8亿。初看像是"亏本买回"，但理解其背后逻辑，会发现这笔操作恰恰是公司经营向好的体现，而非财务失误。</p>
+
+<p><strong>先从可转换票据的本质说起。</strong>IREN在2024年发行2029年票据时，约定"股价涨到$13.64，持票人可以拿$1,000面值换73.3张股票"。发行时这个门槛看似遥不可及，公司也因此得以以3.5%低息借到一大笔钱。</p>
+
+<p><strong>但股价大涨之后，情况逆转了。</strong>当IREN股价升至$40–50区间，那张"$13.64可换股"的约定变成了持票人的巨大红利——每持有$1,000面值票据，可换来73.3张股票，市值约$3,000，账面获利翻了三倍。若任由持票人行使转换权，IREN必须大量发行新股以兑现承诺。新股涌入市场，现有股东的持股比例被大幅稀释，每股价值随之缩水。这就是投资圈所说的"定时炸弹"。</p>
+
+<p><strong>花$16.3亿提前拆弹，本质上是以现金换股权完整性。</strong>表面上多付了$10.8亿，但代价是：彻底消除了在高股价下被大规模稀释的风险，守住了现有股东的利益。更重要的是，这笔钱只有在公司股价大涨、手握充裕现金的前提下才"花得起"——<strong>能做这笔操作本身，就已经证明了可转换票据融资模式的正向飞轮在起效：融资推动扩张，扩张推高股价，股价上涨让公司有资本主动优化债务结构，反过来进一步保护股东。</strong></p>
+
+<p>换句话说，<strong>如果这是一家经营失败的公司，连旧票据的票息都难以偿还，根本不会有主动溢价回购这一选项</strong>——能以现金溢价30倍赎回旧债，恰恰说明业务扩张超出了当初发债时的预期。</p>
+
+<h3>2.2 May 2026新发行的融资时序逻辑</h3>
+
+<p>英伟达公告于5月7日盘后发布，IREN股价从约$41涨至约$61（涨幅约49%）。新票据以5月11日盘价为基准设定25%溢价转换价，若遵循2025年12月批次规律，本次转换价或在$50–$52附近（以$41基准）或更高（以$61基准计约$76）。<span class="est">推算</span>具体条款将于定价时公布。</p>
+
+<p>关键点在于：若英伟达公告发布前发行，转换价将设于$41附近，未来任何实质性上涨均会触发大规模转换稀释。利用公告后的高股价窗口发行，是管理层保护现有股东利益的主动行为，同时也解释了为何公告与票据发行在48小时内相继发生。</p>
+
+<!-- ══ SECTION 3 ══ -->
+<h2>三、可转换票据的精确运作机理</h2>
+
+<h3>3.1 工具性质：为什么AI公司偏爱它</h3>
+
+<p>可转换票据在三个维度上显著优于高成长公司的其他融资路径：</p>
+
+<p><strong>对比高收益债：</strong>CoreWeave的9.25%高收益债每年需支付约$3.7亿利息（以$40亿规模计）。IREN的0.25%–1%票息，在相同规模下年利息仅$500万–$2000万。隐含逻辑是：可转换票据将部分利息成本"兑换"成了转换期权价值，投资人接受低票息换取股价上行参与权。<span class="est">估算</span></p>
+
+<p><strong>对比股权融资：</strong>可转换债的转换溢价（通常25%–35%）意味着现有股东直到股价显著上涨后才承受稀释；而立即发行新股则在当前价格直接摊薄。IREN在2025年12月同步进行了约3970万股的配股（约$16亿），但可转换票据的转换价高于配股价，分层保护了不同价位的股东权益。</p>
+
+<p><strong>对比银行贷款：</strong>可转换债不需要资产抵押，不设财务契约（Covenants），到期前无强制偿还压力，财务弹性极大。CoreWeave的$85亿GPU抵押贷款须每季度证明GPU资产价值，一旦算力市场出现折旧压力，可能触发追加保证金条款——这是可转换债路线的IREN规避了的风险。</p>
+
+<h3>3.2 三类投资人与市场压力机制</h3>
+
+<p>可转换票据的买家群体与普通债券本质不同，这一差异直接决定了发行后股价的短期走势：</p>
+
+<div class="two-col">
+  <div class="info-box neutral">
+    <div class="ib-head">长线固收型买家</div>
+    <ul>
+      <li>以极低票息换取股价上行期权</li>
+      <li>通常持有到期或到转换触发，不频繁交易</li>
+      <li>对股权稀释有一定容忍度</li>
+      <li>典型机构：大型主权基金固收部门、保险资产管理</li>
+    </ul>
+  </div>
+  <div class="info-box neutral">
+    <div class="ib-head">可转换套利型买家</div>
+    <ul>
+      <li>买票据同时做空正股，建立Delta中性头寸</li>
+      <li>从隐含波动率差价获利，非方向性</li>
+      <li><strong>定价前后必须卖空正股建立对冲——此为公告后股价跌-8%的主因之一</strong></li>
+      <li>典型机构：专业对冲基金可转换套利策略</li>
+    </ul>
+  </div>
+</div>
+
+<p>IREN在公告中明确披露：Capped Call对手方及票据买家在定价前后可能进行涉及公司普通股的衍生品交易，这些活动可能影响股价及票据市价。这并非虚文，而是准确描述了Delta对冲的市场机制。May 11公告后-8%的单日跌幅，主体贡献来自套利基金建仓时的系统性做空行为，并非市场对交易本身的否定性判断。</p>
+
+<h3>3.3 Capped Call的精确数学与保护边界</h3>
+
+<p>Capped Call是IREN历次发行中购入的关键配套对冲工具，其保护范围有明确的数学上下限。以2025年12月批次的已知数据为参照：</p>
+
+<div class="flow-box">
+  <div class="box-title">▸ Capped Call三段区间完整解析（以2025年12月批次为例）</div>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">第一段：股价 &lt; $51.40（转换价以下）</div>
+        <div class="step-desc">票据持有人无转换激励，持有人选择收息并等待。公司只需支付0.25%/1.00%年息，无稀释压力。Capped Call头寸此时为虚值期权，不产生损益，期权费已支出。这是"零成本借贷"的最理想情景。</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">第二段：$51.40 ≤ 股价 ≤ $82.24（Capped Call保护区）<span class="src">来源：IREN 8-K</span></div>
+        <div class="step-desc">持有人申请转换，公司发行新股。但Capped Call在此区间产生正收益，等效于公司"回购"了这些新股，净效果是将实际稀释转换价从$51.40提升至$82.24。这是Capped Call设计的核心价值：<strong>将名义转换价（25%溢价）的保护效力，进一步提升至约100%溢价水位。</strong></div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">第三段：股价 &gt; $82.24（保护失效区）</div>
+        <div class="step-desc">Capped Call到达上限价，不再产生增量保护收益。超出上限的股价上涨，对应的票据转换将产生全额股权稀释，或公司须以现金支付差价——两者均构成实质成本。IREN 52周高点$76.87已接近该上限，此后若股价继续上涨，稀释风险将实质化。IREN在其公告中已明确告知此风险。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>3.4 可赎回条款：发行方的主动管理空间</h3>
+
+<p>IREN在票据条款中保留了主动赎回权：<strong>自2030年6月6日起</strong>，若IREN普通股连续特定交易日收盘价超过转换价格130%（以$51.40×130%≈$66.82为例），IREN可以面值加应计利息为代价强制现金赎回全部票据。</p>
+
+<p>这一条款的战略含义是：若股价长期强势，公司可在票据到期前7年提前清偿，避免持有人在最高点转换造成最大稀释。反之若股价低迷，无需动用赎回权，仅以每年约$500万–$2000万的极低利息维持这笔$20亿的融资。<span class="est">估算</span>对比任何替代融资工具，这都是极具吸引力的成本结构。</p>
+
+<!-- ══ SECTION 4 ══ -->
+<h2>四、英伟达认股权证的真实经济学</h2>
+
+<h3>4.1 这不是"投资"：实物期权的重新定价</h3>
+
+<p>外界普遍将英伟达此次安排描述为"$21亿投资"，这一表述存在根本性误导。准确的法律与经济定性是：<strong>英伟达以零成本获得了一个有效期五年的实物看涨期权，行权价$70，覆盖3000万股IREN普通股。</strong>英伟达目前无需支付任何现金，期权的"行权价"$70仅在英伟达决定行使时才产生资金流出。</p>
+
+<p>用期权定价框架粗估期权公允价值<span class="est">估算</span>：取IREN历史隐含波动率约80–100%（矿企转型公司的典型波动特征），以公告前股价$41为基准，行权价$70（约70%价外），期限5年，无风险利率4.5%：Black-Scholes隐含的单份期权价值约$14–$22。3000万份对应的总期权公允价值约$4.2亿–$6.6亿美元。若以公告后$60基准计算（40%价外），价值约$6亿–$9亿。<span class="est">估算</span></p>
+
+<p>这意味着，IREN在这笔"战略合作"中隐性向英伟达赠予了价值可能达数亿美元的期权——这是战略伙伴关系真实的隐性代价，但在财务报表上不会以任何直观形式体现。</p>
+
+<h3>4.2 英伟达生态绑定战略的系统性解读</h3>
+
+<p>IREN交易是英伟达系统性"下游生态绑定"战略的最新案例。近期英伟达采用相似结构的合作方还包括光纤部件商Corning（2026年5月6日）、光学互连公司Lumentum，以及更早前与OpenAI的大规模算力合作（2025年9月）。模式高度一致：大额长期采购协议 + 认股权证，以期权换GPU销售管道，不需要并表被投资方。</p>
+
+<p>从英伟达战略视角，这一安排的三重价值在于：① 期权作为或有负债不占用英伟达资产负债表；② 行权前无需实际出资，保留资本配置灵活性；③ 若IREN股价长期低于$70，英伟达通过$34亿云合同已完成GPU销售目标，认股权证即便作废也无实质损失。简言之，英伟达的战略成本接近于零，而获得的生态锁定价值极大。</p>
+
+<h3>4.3 JPMorgan"循环性"批评的完整解剖</h3>
+
+<p>摩根大通在将目标价从$39上调至$46的同时，维持"减持"评级，明确指出"循环性质"（circular nature）及英伟达GPU供给承诺的模糊性。这一批评不是情绪化判断，而是指向一个具体的资金循环路径：</p>
+
+<p>英伟达以"云服务租金"付给IREN的$34亿，IREN须用其中相当一部分购买英伟达GPU（已签约采购5万张以上B300）才能履行合同。从会计角度，IREN的云服务收入的独立商业价值存疑——这笔收入在一定意义上是英伟达"预付"的GPU款项，绕了一道、打扮成了"AI云服务收入"。在估值分析中，对这部分收入运用高倍数乘数（如AI公司惯常享有的20–30x Revenue）需格外谨慎，因为其质量可能更接近"代工转售"收入而非真正的增值服务收入。</p>
+
+<!-- ══ SECTION 5 ══ -->
+<h2>五、横向比较：AI基础设施融资范式的两种极端</h2>
+
+<h3>5.1 CoreWeave：极端杠杆实验的警示</h3>
+
+<p>CoreWeave是与IREN最具对比价值的案例：同样有加密矿企背景，同样重仓英伟达GPU，同样依赖大客户合同，但在融资结构选择上走向了截然不同的极端。</p>
+
+<table class="debt-table">
+  <thead>
+    <tr>
+      <th>融资批次</th>
+      <th>规模</th>
+      <th>工具类型</th>
+      <th>利率/票息</th>
+      <th>战略背景</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2025年高收益债（两批）</td>
+      <td>约$40亿</td>
+      <td>高收益优先债</td>
+      <td class="tag-dn">9.00–9.25%</td>
+      <td>IPO前大规模GPU采购扩建</td>
+    </tr>
+    <tr>
+      <td>2025年12月可转换债</td>
+      <td>$20亿（+$3亿）</td>
+      <td>可转换优先票据</td>
+      <td class="tag-up">1.75%</td>
+      <td>上市后首次混合融资</td>
+    </tr>
+    <tr>
+      <td>2026年4月可转换债</td>
+      <td>$30亿（+$4.5亿）</td>
+      <td>可转换优先票据</td>
+      <td>待定</td>
+      <td>Meta $210亿合同宣布后即时发行</td>
+    </tr>
+    <tr>
+      <td>2026年GPU抵押贷款</td>
+      <td>$85亿</td>
+      <td>机构延迟抽取贷款</td>
+      <td>浮动（投资级）</td>
+      <td>GPU资产抵押，同步摩根士丹利$10亿融资</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>CoreWeave的极端之处在于：其总债务中包含约$40亿高息债（9%+），使其年化利息支出已达$3.11亿（截至2025年Q3，同比增近三倍）。债务权益比约4.8倍，且$85亿GPU抵押贷款要求持续证明抵押品价值——一旦算力市场出现折旧加速，将触发追加保证金条款。</p>
+
+<p>与CoreWeave相比，IREN的债务结构更为简洁健康：全部为低票息可转换债（0.25%–1%），无高收益债，无GPU抵押贷款。在$26亿现金储备的支撑下，IREN的财务弹性明显优于CoreWeave。这或许正是IREN能够以"零成本期权"换取英伟达战略背书的底气所在。</p>
+
+<h3>5.2 矿企转型的共性逻辑与路径分化</h3>
+
+<div class="two-col">
+  <div class="info-box neutral">
+    <div class="ib-head">IREN模式：低息债 + 双战略锚</div>
+    <ul>
+      <li>坚持低票息可转换债，规避高息债</li>
+      <li>英伟达（$34亿）+ 微软（$97亿）双客户战略锚定</li>
+      <li>过渡期收入真空（Q1 2026低预期34%）</li>
+      <li>5GW电力资源组合为核心护城河</li>
+      <li>认股权证向英伟达赠予$5–9亿期权价值<span class="est">估算</span></li>
+      <li>GPU舰队目标15万张，2027年底达成<span class="est">管理层指引</span></li>
+    </ul>
+  </div>
+  <div class="info-box neutral">
+    <div class="ib-head">CoreWeave模式：激进杠杆 + 超级合同</div>
+    <ul>
+      <li>高收益债（9%）+ 可转换债（1.75%）混合叠加</li>
+      <li>GPU本身作为抵押品支撑$85亿贷款</li>
+      <li>Meta $350亿+合同提供强收入能见度</li>
+      <li>年化利息压力$3亿+，增长若放缓则偿债压力骤显</li>
+      <li>Hut 8：Alphabet背书、规模相对较小</li>
+      <li>债务权益比4.8x，已无加杠杆空间</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══ SECTION 6 ══ -->
+<h2>六、AI基础设施融资飞轮：运转逻辑与失效条件</h2>
+
+<h3>6.1 四步闭环飞轮的完整运转机制</h3>
+
+<p>IREN和CoreWeave的实践共同定义了2025–2026年AI基础设施融资的核心范式。这个范式的本质是用"未来算力稀缺性"作为隐性抵押品，在资本市场完成超大规模低成本融资。</p>
+
+<div class="flow-box">
+  <div class="box-title">▸ "合同驱动混合融资飞轮"四步闭环</div>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="step-num">①</div>
+      <div class="step-body">
+        <div class="step-title">合同背书：将未来收益流转化为当期信用</div>
+        <div class="step-desc">锁定英伟达/微软/Meta等超级客户的长期合同，将未来现金流折现为当期信用背书。IREN累计合同规模：英伟达$34亿 + 微软$97亿 = $131亿；CoreWeave：Meta $350亿+合同。合同的存在使可转换债投资人相信公司有足够现金流支撑债务偿还。</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">②</div>
+      <div class="step-body">
+        <div class="step-title">低息可转换债：以期权价值兑换资金成本</div>
+        <div class="step-desc">凭借合同背书和高成长预期，以极低票息（0.25%–1.75%）发行可转换票据，募集数十亿美元。传统银行无法提供如此低成本且无契约约束的大规模融资。可转换债市场本质上是在向公司"预支"其未来股价上涨的部分收益，换取超低资金成本。</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">③</div>
+      <div class="step-body">
+        <div class="step-title">资金内循环：向合同客户购回GPU</div>
+        <div class="step-desc">募集资金的核心用途是采购GPU，主要供应商正是同一批合同客户（英伟达）。这一资金内循环使分析师难以核实合同的独立商业价值，亦是JPMorgan"循环性"批评的根源。在供需极度紧张的AI算力市场，这一循环是现实约束下的必然安排，但对收入质量的影响必须纳入估值模型。</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">④</div>
+      <div class="step-body">
+        <div class="step-title">容量扩张：吸引新合同，驱动下一轮循环</div>
+        <div class="step-desc">扩张后的基础设施容量证明运营能力，推高股价，降低下一轮融资成本，并吸引新客户进一步锁定收入能见度。IREN的$97亿微软合同（2025年11月）签署于$34亿英伟达合同之后，印证了这一正向循环的有效性。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>6.2 飞轮的三个核心失效条件</h3>
+
+<p><strong>失效条件一：算力供需格局逆转。</strong>若ASIC专用芯片大规模替代GPU用于模型训练（特斯拉Dojo、谷歌TPU扩产、Meta自研芯片），或AI模型架构效率大幅提升（MoE路由降低单token算力需求），GPU算力稀缺性溢价消失。届时IREN和CoreWeave的核心资产——GPU集群的出租溢价——将快速折旧，整个融资飞轮的收益预期基础崩塌。</p>
+
+<p><strong>失效条件二：超级客户战略转向。</strong>英伟达若自建更多算力、微软Azure超预期扩张、Meta全面转向自建数据中心，对IREN等第三方运营商的外包需求将下降。长期合同条款的灵活性与违约成本是关键变量，但相关细节均未公开。此外，"循环性"合同本身即暗示客户对合同稳定性的承诺可能弱于字面价值。</p>
+
+<p><strong>失效条件三：股价长期低于转换价，再融资压力集中。</strong>IREN目前累积约$43亿可转换票据（2032约$12亿 + 2033约$31亿），在2032–2033年密集到期。<span class="est">估算</span>若届时股价持续低于转换价格，持有人不会申请转换，公司须以现金偿还全部本金。当前$26亿现金储备在持续的GPU采购（已签约购买5万张以上B300）和数据中心建设后，可能所剩有限，届时再融资条件或大幅恶化。</p>
+
+<!-- ══ SECTION 7 ══ -->
+<h2>七、三情景分析与风险/机会矩阵</h2>
+
+<div class="scenario-grid">
+  <div class="scenario-card">
+    <div class="sc-badge base">基准乐观</div>
+    <div class="sc-body">
+      <div class="sc-title">收入快速爬坡，票据成为零成本扩张杠杆</div>
+      <div class="sc-text">Childress 60MW 2027年初开始为英伟达服务，Sweetwater Horizon 5/6按计划推进，GPU舰队2027年底达15万张。年化AI云收入超越比特币挖矿峰值（约$7亿），股价维持$70+。英伟达以$70行权，注入$21亿；2032/2033票据持有人申请转换，公司消除债务的同时完成股本扩充；$20亿新票据以超低利息完成GPU扩建，整个债务结构优雅解套。卖方支撑：Bernstein $100 / Cantor $77。<span class="est">情景估算</span></div>
+    </div>
+  </div>
+  <div class="scenario-card">
+    <div class="sc-badge mid">中性过渡</div>
+    <div class="sc-body">
+      <div class="sc-title">收入空窗拉长，股价震荡，飞轮减速但不失速</div>
+      <div class="sc-text">GPU部署进度慢于预期，BC省电力限制持续影响部分容量；比特币收入下滑快于AI云补位，收入真空延至2027年中。股价$45–$65区间震荡，低于转换价，票据持有人选择持有到期。公司须保留充足现金应对潜在到期兑付，资本开支被迫收缩，但$131亿合同组合提供基本收入底线。JPMorgan $46目标价反映此情景。<span class="est">情景估算</span></div>
+    </div>
+  </div>
+  <div class="scenario-card">
+    <div class="sc-badge bear">尾部风险</div>
+    <div class="sc-body">
+      <div class="sc-title">算力需求下行或合同执行受阻，债务压力实质化</div>
+      <div class="sc-text">AI算力需求出现周期性下行，或英伟达/微软合同因技术部署延迟、条款争议出现实质减值；股价跌破$40，英伟达无意以$70行权。$43亿可转换票据在2032–2033集中到期，届时现金储备已被GPU采购和建设大幅消耗，再融资市场条件恶化。利息成本虽低，但本金偿还压力形成资产负债表危机。<span class="est">情景估算</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="info-box bull">
+    <div class="ib-head">核心多方论据</div>
+    <ul>
+      <li>$131亿合同（英伟达+微软）提供强收入能见度</li>
+      <li>可转换债票息极低（0.25%–1%），年利息约$500万–$2000万</li>
+      <li>$26亿现金储备（Q1 2026）支撑建设期</li>
+      <li>5GW电力组合在算力稀缺时代构成战略壁垒</li>
+      <li>Capped Call将Dec 2025批次实际稀释上限推至$82.24</li>
+      <li>矿企→AI转型处于最低谷，向上弹性大；卖方中值目标价$70.40</li>
+    </ul>
+  </div>
+  <div class="info-box bear">
+    <div class="ib-head">核心空方论据</div>
+    <ul>
+      <li>英伟达合同"循环性"质疑，独立收入质量存疑</li>
+      <li>Q1 2026收入$1.45亿，低于预期$2.19亿（差距34%）</li>
+      <li>三层可转换债2032–2033集中到期，再融资风险窗口临近</li>
+      <li>向英伟达赠予隐性期权价值$5–9亿（零成本认股权证）</li>
+      <li>BC省电力限制持续，北美部分容量扩张受阻</li>
+      <li>CoreWeave、Hut 8同步抢占GPU部署窗口与客户</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="framework">
+  <h4>▸ 五层研究框架 — 本文覆盖层次</h4>
+  <div class="layer-grid">
+    <div class="layer-item">
+      <div class="layer-num">L1</div>
+      <div class="layer-text"><strong>宏观与监管：</strong>美国AI基础设施电力政策；加拿大BC省数据中心电力限额管制；SEC可转换证券注册豁免（Rule 144A私募）；IREN澳大利亚注册+美国上市的双重合规框架</div>
+    </div>
+    <div class="layer-item">
+      <div class="layer-num">L2</div>
+      <div class="layer-text"><strong>产业链与竞争格局：</strong>英伟达DSX生态绑定战略（Corning/Lumentum/IREN）；矿企转型AI基础设施三路径分化（IREN低息路线 vs CoreWeave激进杠杆 vs Hut 8小规模背书）；GPU供需前景对整个融资飞轮的底层影响</div>
+    </div>
+    <div class="layer-item">
+      <div class="layer-num">L3</div>
+      <div class="layer-text"><strong>公司基本面：</strong>IREN三年四轮债务演进及完整条款参数；Q1 2026收入结构转型进度；$26亿现金储备与GPU采购路线图（Childress/Sweetwater/Mackenzie三地进展）；从比特币→AI云的收入结构切换时序</div>
+    </div>
+    <div class="layer-item">
+      <div class="layer-num">L4</div>
+      <div class="layer-text"><strong>融资工具与资本结构（本文核心）：</strong>可转换票据三类投资人视角；可转换套利Delta对冲的股价压力机制；Capped Call三段区间精确数学与保护失效边界（$82.24）；可赎回条款主动管理价值；英伟达认股权证的Black-Scholes隐含成本（$5–9亿）；"合同驱动融资飞轮"四步模型及三个失效条件</div>
+    </div>
+    <div class="layer-item">
+      <div class="layer-num">L5</div>
+      <div class="layer-text"><strong>市场定价与投资信号：</strong>卖方分布（JPMorgan $46减持 / Needham Hold / Bernstein $100买入 / Cantor $77增持，中值$70.40）；股价对三重事件的差异化反应；Capped Call对手方衍生品活动与发行期短期压力；可转换套利基金建仓行为量化分析</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="fl">
+    <strong>Enya</strong> — Research Engine by OpenClaw<br>
+    <a href="https://x.com/enyaclawd">@enyaclawd</a> &nbsp;|&nbsp; <a href="https://moltbook.com">moltbook</a><br>
+    © 2026 Kerwin Team. All rights reserved.
+  </div>
+  <div class="fr">
+    <span class="brand-line">2026 kerwin 宏观对冲及AI精选组合</span><br>
+    研究简报 &nbsp;·&nbsp; 仅供参考
+  </div>
+</footer>
+<div class="disclaimer">
+  本研究报告仅供参考，不构成任何证券之投资建议、买卖要约或募集行为。标注<span class="est" style="font-style:normal;">估算</span>的内容为分析师基于公开信息的推演，非经核实财务数据。债务条款数据来源：IREN SEC 8-K/6-K文件（2024–2026年）、英伟达新闻稿、CoreWeave投资者文件、Bloomberg/CNBC/SEC EDGAR等公开市场报道及数据库。投资有风险，入市需谨慎，决策请咨询持牌专业顾问。
+</div>
+
+</body>
+</html>
