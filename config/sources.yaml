@@ -1,5 +1,10 @@
+# AI 行业新闻源配置
+#
+# Hacker News 和 arXiv 是内置源，无需在此配置，始终会抓取。
+# 以下 RSS/Atom 源作为补充，按需启用/禁用。
+
 sources:
-  # 英文来源
+  # ── 英文媒体 ────────────────────────────────────────────────────────────────
   - name: "TechCrunch AI"
     url: "https://techcrunch.com/category/artificial-intelligence/feed/"
     language: "en"
@@ -8,27 +13,27 @@ sources:
     url: "https://venturebeat.com/category/ai/feed/"
     language: "en"
 
-  - name: "MIT Technology Review"
-    url: "https://www.technologyreview.com/feed/"
-    language: "en"
-
   - name: "The Verge AI"
     url: "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml"
     language: "en"
 
-  - name: "Hugging Face Blog"
-    url: "https://huggingface.co/blog/feed.xml"
+  - name: "Ars Technica"
+    url: "https://feeds.arstechnica.com/arstechnica/technology-lab"
     language: "en"
 
-  - name: "Google DeepMind Blog"
-    url: "https://deepmind.google/blog/rss.xml"
+  - name: "MIT Technology Review"
+    url: "https://www.technologyreview.com/feed/"
     language: "en"
 
-  - name: "Hacker News"
-    url: "https://hnrss.org/frontpage?q=AI+OR+LLM+OR+GPT+OR+Claude+OR+Gemini"
+  - name: "Wired AI"
+    url: "https://www.wired.com/feed/tag/ai/latest/rss"
     language: "en"
 
-  # 中文来源
+  - name: "AI News"
+    url: "https://artificialintelligence-news.com/feed/"
+    language: "en"
+
+  # ── 中文媒体 ────────────────────────────────────────────────────────────────
   - name: "机器之心"
     url: "https://www.jiqizhixin.com/rss"
     language: "zh"
@@ -37,7 +42,11 @@ sources:
     url: "https://www.qbitai.com/feed"
     language: "zh"
 
+  - name: "新智元"
+    url: "https://www.ainews.com.cn/feed"
+    language: "zh"
+
 settings:
-  max_items_per_source: 10
-  hours_lookback: 24
-  digest_language: "zh"   # zh = 中文日报, en = English digest
+  max_items_per_source: 10   # 每个 RSS 源最多抓取条数
+  hours_lookback: 24          # 抓取过去多少小时的新闻
+  # arXiv 固定 48h（论文发布周期较长）
